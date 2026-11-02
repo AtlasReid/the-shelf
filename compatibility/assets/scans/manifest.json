@@ -1,0 +1,958 @@
+{
+  "formatVersion": 1,
+  "codec": "WebP",
+  "fullLongEdge": 1800,
+  "previewLongEdge": 512,
+  "fullQuality": 90,
+  "previewQuality": 85,
+  "colourSpace": "sRGB",
+  "sourceMetadataIncluded": false,
+  "cards": [
+    {
+      "id": "card-01",
+      "scanNumber": "01",
+      "sourceFolder": "Card_01",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        132.55,
+        187.1
+      ],
+      "outsideSizeMm": [
+        265.1,
+        187.1
+      ],
+      "insideSizeMm": [
+        265.1,
+        187.1
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-01_265.1x187.1mm_6263x4420px.jpg",
+          "cropPixels": [
+            3131,
+            0,
+            6263,
+            4420
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-01-front_132.55x187.1mm.webp",
+          "preview": "assets/scans/previews/card-01-front_132.55x187.1mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-01_265.1x187.1mm_6263x4420px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3131,
+            4420
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-01-back_132.55x187.1mm.webp",
+          "preview": "assets/scans/previews/card-01-back_132.55x187.1mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-02_265.1x187.1mm_6262x4420px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3131,
+            4420
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-01-inside-left_132.55x187.1mm.webp",
+          "preview": "assets/scans/previews/card-01-inside-left_132.55x187.1mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-02_265.1x187.1mm_6262x4420px.jpg",
+          "cropPixels": [
+            3131,
+            0,
+            6262,
+            4420
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-01-inside-right_132.55x187.1mm.webp",
+          "preview": "assets/scans/previews/card-01-inside-right_132.55x187.1mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-02",
+      "scanNumber": "02",
+      "sourceFolder": "Card_02",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        158.55,
+        159.8
+      ],
+      "outsideSizeMm": [
+        317.1,
+        159.8
+      ],
+      "insideSizeMm": [
+        317.2,
+        159.6
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-03_317.1x159.8mm_7490x3774px.jpg",
+          "cropPixels": [
+            3745,
+            0,
+            7490,
+            3774
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-02-front_158.55x159.8mm.webp",
+          "preview": "assets/scans/previews/card-02-front_158.55x159.8mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-03_317.1x159.8mm_7490x3774px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3745,
+            3774
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-02-back_158.55x159.8mm.webp",
+          "preview": "assets/scans/previews/card-02-back_158.55x159.8mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-04_317.2x159.6mm_7492x3771px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3746,
+            3771
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-02-inside-left_158.55x159.8mm.webp",
+          "preview": "assets/scans/previews/card-02-inside-left_158.55x159.8mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-04_317.2x159.6mm_7492x3771px.jpg",
+          "cropPixels": [
+            3746,
+            0,
+            7492,
+            3771
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-02-inside-right_158.55x159.8mm.webp",
+          "preview": "assets/scans/previews/card-02-inside-right_158.55x159.8mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-03",
+      "scanNumber": "03",
+      "sourceFolder": "Card_03",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        124.8,
+        135.0
+      ],
+      "outsideSizeMm": [
+        249.6,
+        135.0
+      ],
+      "insideSizeMm": [
+        249.7,
+        135.0
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-05_249.6x135.0mm_5896x3189px.jpg",
+          "cropPixels": [
+            2948,
+            0,
+            5896,
+            3189
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-03-front_124.8x135mm.webp",
+          "preview": "assets/scans/previews/card-03-front_124.8x135mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-05_249.6x135.0mm_5896x3189px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2948,
+            3189
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-03-back_124.8x135mm.webp",
+          "preview": "assets/scans/previews/card-03-back_124.8x135mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-06_249.7x135.0mm_5899x3190px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2949,
+            3190
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-03-inside-left_124.8x135mm.webp",
+          "preview": "assets/scans/previews/card-03-inside-left_124.8x135mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-06_249.7x135.0mm_5899x3190px.jpg",
+          "cropPixels": [
+            2949,
+            0,
+            5899,
+            3190
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-03-inside-right_124.8x135mm.webp",
+          "preview": "assets/scans/previews/card-03-inside-right_124.8x135mm.webp"
+        }
+      },
+      "finish": "gold-foil",
+      "finishMaps": {
+        "front": "assets/scans/card-03-front-foil_124.8x135mm.png"
+      }
+    },
+    {
+      "id": "card-04",
+      "scanNumber": "04",
+      "sourceFolder": "Card_04",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        104.3,
+        150.2
+      ],
+      "outsideSizeMm": [
+        208.6,
+        150.2
+      ],
+      "insideSizeMm": [
+        208.6,
+        150.2
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-07_208.6x150.2mm_4927x3547px.jpg",
+          "cropPixels": [
+            2463,
+            0,
+            4927,
+            3547
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-04-front_104.3x150.2mm.webp",
+          "preview": "assets/scans/previews/card-04-front_104.3x150.2mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-07_208.6x150.2mm_4927x3547px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2463,
+            3547
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-04-back_104.3x150.2mm.webp",
+          "preview": "assets/scans/previews/card-04-back_104.3x150.2mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-09_208.6x150.2mm_4928x3548px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2464,
+            3548
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-04-inside-left_104.3x150.2mm.webp",
+          "preview": "assets/scans/previews/card-04-inside-left_104.3x150.2mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-09_208.6x150.2mm_4928x3548px.jpg",
+          "cropPixels": [
+            2464,
+            0,
+            4928,
+            3548
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-04-inside-right_104.3x150.2mm.webp",
+          "preview": "assets/scans/previews/card-04-inside-right_104.3x150.2mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-05",
+      "scanNumber": "05",
+      "sourceFolder": "Card_05",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        104.1,
+        150.3
+      ],
+      "outsideSizeMm": [
+        208.2,
+        150.3
+      ],
+      "insideSizeMm": [
+        208.2,
+        150.3
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-08_208.2x150.3mm_4917x3550px.jpg",
+          "cropPixels": [
+            2458,
+            0,
+            4917,
+            3550
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-05-front_104.1x150.3mm.webp",
+          "preview": "assets/scans/previews/card-05-front_104.1x150.3mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-08_208.2x150.3mm_4917x3550px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2458,
+            3550
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-05-back_104.1x150.3mm.webp",
+          "preview": "assets/scans/previews/card-05-back_104.1x150.3mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-10_208.2x150.3mm_4919x3551px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2459,
+            3551
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-05-inside-left_104.1x150.3mm.webp",
+          "preview": "assets/scans/previews/card-05-inside-left_104.1x150.3mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-10_208.2x150.3mm_4919x3551px.jpg",
+          "cropPixels": [
+            2459,
+            0,
+            4919,
+            3551
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-05-inside-right_104.1x150.3mm.webp",
+          "preview": "assets/scans/previews/card-05-inside-right_104.1x150.3mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-06",
+      "scanNumber": "06",
+      "sourceFolder": "Card_06",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        119.7,
+        169.8
+      ],
+      "outsideSizeMm": [
+        239.4,
+        169.8
+      ],
+      "insideSizeMm": [
+        239.5,
+        169.9
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-12_239.4x169.8mm_5656x4012px.jpg",
+          "cropPixels": [
+            2828,
+            0,
+            5656,
+            4012
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-06-front_119.7x169.8mm.webp",
+          "preview": "assets/scans/previews/card-06-front_119.7x169.8mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-12_239.4x169.8mm_5656x4012px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2828,
+            4012
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-06-back_119.7x169.8mm.webp",
+          "preview": "assets/scans/previews/card-06-back_119.7x169.8mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-11_239.5x169.9mm_5658x4013px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2829,
+            4013
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-06-inside-left_119.7x169.8mm.webp",
+          "preview": "assets/scans/previews/card-06-inside-left_119.7x169.8mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-11_239.5x169.9mm_5658x4013px.jpg",
+          "cropPixels": [
+            2829,
+            0,
+            5658,
+            4013
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-06-inside-right_119.7x169.8mm.webp",
+          "preview": "assets/scans/previews/card-06-inside-right_119.7x169.8mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-07",
+      "scanNumber": "07",
+      "sourceFolder": "Card_07",
+      "type": "postcard",
+      "foldAxis": "none",
+      "closedSizeMm": [
+        148.3,
+        104.8
+      ],
+      "outsideSizeMm": [
+        148.3,
+        104.8
+      ],
+      "insideSizeMm": [
+        148.4,
+        104.9
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-14_148.3x104.8mm_3504x2476px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3504,
+            2476
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-07-front_148.3x104.8mm.webp",
+          "preview": "assets/scans/previews/card-07-front_148.3x104.8mm.webp"
+        },
+        "back": {
+          "source": "2_Inside_from-13_148.4x104.9mm_3505x2477px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3505,
+            2477
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-07-back_148.3x104.8mm.webp",
+          "preview": "assets/scans/previews/card-07-back_148.3x104.8mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-08",
+      "scanNumber": "08",
+      "sourceFolder": "Card_08",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        134.5,
+        134.9
+      ],
+      "outsideSizeMm": [
+        269.0,
+        134.9
+      ],
+      "insideSizeMm": [
+        269.0,
+        134.8
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-15_269.0x134.9mm_6354x3186px.jpg",
+          "cropPixels": [
+            3177,
+            0,
+            6354,
+            3186
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-08-front_134.5x134.9mm.webp",
+          "preview": "assets/scans/previews/card-08-front_134.5x134.9mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-15_269.0x134.9mm_6354x3186px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3177,
+            3186
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-08-back_134.5x134.9mm.webp",
+          "preview": "assets/scans/previews/card-08-back_134.5x134.9mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-17_269.0x134.8mm_6354x3185px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3177,
+            3185
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-08-inside-left_134.5x134.9mm.webp",
+          "preview": "assets/scans/previews/card-08-inside-left_134.5x134.9mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-17_269.0x134.8mm_6354x3185px.jpg",
+          "cropPixels": [
+            3177,
+            0,
+            6354,
+            3185
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-08-inside-right_134.5x134.9mm.webp",
+          "preview": "assets/scans/previews/card-08-inside-right_134.5x134.9mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-09",
+      "scanNumber": "09",
+      "sourceFolder": "Card_09",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        134.65,
+        134.8
+      ],
+      "outsideSizeMm": [
+        269.3,
+        134.8
+      ],
+      "insideSizeMm": [
+        269.4,
+        134.8
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-16_269.3x134.8mm_6361x3184px.jpg",
+          "cropPixels": [
+            3180,
+            0,
+            6361,
+            3184
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-09-front_134.65x134.8mm.webp",
+          "preview": "assets/scans/previews/card-09-front_134.65x134.8mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-16_269.3x134.8mm_6361x3184px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3180,
+            3184
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-09-back_134.65x134.8mm.webp",
+          "preview": "assets/scans/previews/card-09-back_134.65x134.8mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-18_269.4x134.8mm_6363x3185px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3181,
+            3185
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-09-inside-left_134.65x134.8mm.webp",
+          "preview": "assets/scans/previews/card-09-inside-left_134.65x134.8mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-18_269.4x134.8mm_6363x3185px.jpg",
+          "cropPixels": [
+            3181,
+            0,
+            6363,
+            3185
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-09-inside-right_134.65x134.8mm.webp",
+          "preview": "assets/scans/previews/card-09-inside-right_134.65x134.8mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-10",
+      "scanNumber": "10",
+      "sourceFolder": "Card_10",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        134.65,
+        134.9
+      ],
+      "outsideSizeMm": [
+        269.3,
+        134.9
+      ],
+      "insideSizeMm": [
+        269.4,
+        135.0
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-24_269.3x134.9mm_6361x3186px.jpg",
+          "cropPixels": [
+            3180,
+            0,
+            6361,
+            3186
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-10-front_134.65x134.9mm.webp",
+          "preview": "assets/scans/previews/card-10-front_134.65x134.9mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-24_269.3x134.9mm_6361x3186px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3180,
+            3186
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-10-back_134.65x134.9mm.webp",
+          "preview": "assets/scans/previews/card-10-back_134.65x134.9mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-23_269.4x135.0mm_6364x3188px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3182,
+            3188
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-10-inside-left_134.65x134.9mm.webp",
+          "preview": "assets/scans/previews/card-10-inside-left_134.65x134.9mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-23_269.4x135.0mm_6364x3188px.jpg",
+          "cropPixels": [
+            3182,
+            0,
+            6364,
+            3188
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-10-inside-right_134.65x134.9mm.webp",
+          "preview": "assets/scans/previews/card-10-inside-right_134.65x134.9mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-11",
+      "scanNumber": "11",
+      "sourceFolder": "Card_11",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        124.65,
+        164.6
+      ],
+      "outsideSizeMm": [
+        249.3,
+        164.6
+      ],
+      "insideSizeMm": [
+        249.0,
+        164.6
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-21_249.3x164.6mm_5889x3888px.jpg",
+          "cropPixels": [
+            2944,
+            0,
+            5889,
+            3888
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-11-front_124.65x164.6mm.webp",
+          "preview": "assets/scans/previews/card-11-front_124.65x164.6mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-21_249.3x164.6mm_5889x3888px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2944,
+            3888
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-11-back_124.65x164.6mm.webp",
+          "preview": "assets/scans/previews/card-11-back_124.65x164.6mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-22_249.0x164.6mm_5883x3889px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            2941,
+            3889
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-11-inside-left_124.65x164.6mm.webp",
+          "preview": "assets/scans/previews/card-11-inside-left_124.65x164.6mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-22_249.0x164.6mm_5883x3889px.jpg",
+          "cropPixels": [
+            2941,
+            0,
+            5883,
+            3889
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-11-inside-right_124.65x164.6mm.webp",
+          "preview": "assets/scans/previews/card-11-inside-right_124.65x164.6mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-12",
+      "scanNumber": "12",
+      "sourceFolder": "Card_12",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        159.8,
+        160.2
+      ],
+      "outsideSizeMm": [
+        319.6,
+        160.2
+      ],
+      "insideSizeMm": [
+        319.6,
+        160.3
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-19_319.6x160.2mm_7550x3785px.jpg",
+          "cropPixels": [
+            3775,
+            0,
+            7550,
+            3785
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-12-front_159.8x160.2mm.webp",
+          "preview": "assets/scans/previews/card-12-front_159.8x160.2mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-19_319.6x160.2mm_7550x3785px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3775,
+            3785
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-12-back_159.8x160.2mm.webp",
+          "preview": "assets/scans/previews/card-12-back_159.8x160.2mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-20_319.6x160.3mm_7550x3787px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3775,
+            3787
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-12-inside-left_159.8x160.2mm.webp",
+          "preview": "assets/scans/previews/card-12-inside-left_159.8x160.2mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-20_319.6x160.3mm_7550x3787px.jpg",
+          "cropPixels": [
+            3775,
+            0,
+            7550,
+            3787
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-12-inside-right_159.8x160.2mm.webp",
+          "preview": "assets/scans/previews/card-12-inside-right_159.8x160.2mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-13",
+      "scanNumber": "13",
+      "sourceFolder": "Card_13",
+      "type": "folded",
+      "foldAxis": "vertical",
+      "closedSizeMm": [
+        148.35,
+        210.8
+      ],
+      "outsideSizeMm": [
+        296.7,
+        210.8
+      ],
+      "insideSizeMm": [
+        296.9,
+        210.8
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-27_296.7x210.8mm_7009x4979px.jpg",
+          "cropPixels": [
+            3504,
+            0,
+            7009,
+            4979
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-13-front_148.35x210.8mm.webp",
+          "preview": "assets/scans/previews/card-13-front_148.35x210.8mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-27_296.7x210.8mm_7009x4979px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3504,
+            4979
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-13-back_148.35x210.8mm.webp",
+          "preview": "assets/scans/previews/card-13-back_148.35x210.8mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-28_296.9x210.8mm_7013x4979px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            3506,
+            4979
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-13-inside-left_148.35x210.8mm.webp",
+          "preview": "assets/scans/previews/card-13-inside-left_148.35x210.8mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-28_296.9x210.8mm_7013x4979px.jpg",
+          "cropPixels": [
+            3506,
+            0,
+            7013,
+            4979
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-13-inside-right_148.35x210.8mm.webp",
+          "preview": "assets/scans/previews/card-13-inside-right_148.35x210.8mm.webp"
+        }
+      }
+    },
+    {
+      "id": "card-14",
+      "scanNumber": "14",
+      "sourceFolder": "Card_14",
+      "type": "folded",
+      "foldAxis": "horizontal",
+      "closedSizeMm": [
+        210.6,
+        148.4
+      ],
+      "outsideSizeMm": [
+        210.6,
+        296.8
+      ],
+      "insideSizeMm": [
+        210.6,
+        296.8
+      ],
+      "surfaces": {
+        "front": {
+          "source": "1_Outside_from-29_210.6x296.8mm_4974x7011px.jpg",
+          "cropPixels": [
+            0,
+            3505,
+            4974,
+            7011
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-14-front_210.6x148.4mm.webp",
+          "preview": "assets/scans/previews/card-14-front_210.6x148.4mm.webp"
+        },
+        "back": {
+          "source": "1_Outside_from-29_210.6x296.8mm_4974x7011px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            4974,
+            3505
+          ],
+          "rotationDegrees": 180,
+          "full": "assets/scans/card-14-back_210.6x148.4mm.webp",
+          "preview": "assets/scans/previews/card-14-back_210.6x148.4mm.webp"
+        },
+        "insideLeft": {
+          "source": "2_Inside_from-30_210.6x296.8mm_4975x7010px.jpg",
+          "cropPixels": [
+            0,
+            0,
+            4975,
+            3505
+          ],
+          "rotationDegrees": 180,
+          "full": "assets/scans/card-14-inside-left_210.6x148.4mm.webp",
+          "preview": "assets/scans/previews/card-14-inside-left_210.6x148.4mm.webp"
+        },
+        "insideRight": {
+          "source": "2_Inside_from-30_210.6x296.8mm_4975x7010px.jpg",
+          "cropPixels": [
+            0,
+            3505,
+            4975,
+            7010
+          ],
+          "rotationDegrees": 0,
+          "full": "assets/scans/card-14-inside-right_210.6x148.4mm.webp",
+          "preview": "assets/scans/previews/card-14-inside-right_210.6x148.4mm.webp"
+        }
+      }
+    }
+  ]
+}

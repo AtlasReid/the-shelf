@@ -1,0 +1,90 @@
+/* The rail is a real curved pointer target; the surrounding overlay lets canvas input through. */
+.light-control {
+  --light-handle-x: 50%;
+  --light-handle-y: 28.333%;
+  --light-orbit-x: 0px;
+  --light-orbit-y: -54px;
+  --light-orbit-outward-x: 72px;
+  --light-layout-duration: 950ms;
+  --light-layout-ease: var(--motion-layout-ease, cubic-bezier(.76, 0, .24, 1));
+  position: absolute;
+  z-index: 4;
+  top: clamp(112px, 12%, 210px);
+  left: 50%;
+  width: min(780px, calc(100% - 64px));
+  transform: translateX(-50%);
+  transition: top var(--light-layout-duration) var(--light-layout-ease), left var(--light-layout-duration) var(--light-layout-ease), width var(--light-layout-duration) var(--light-layout-ease);
+  color: var(--olive, #59664c);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.light-control__arc-wrap { position: relative; width: 100%; aspect-ratio: 1000 / 180; }
+.light-control__arc { display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.light-control__rail { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; opacity: .45; }
+.light-control__hit { fill: none; stroke: transparent; stroke-width: 40; vector-effect: non-scaling-stroke; pointer-events: stroke; cursor: ew-resize; touch-action: none; }
+.light-control__handle { position: absolute; left: var(--light-handle-x); top: var(--light-handle-y); display: grid; place-items: center; width: 34px; height: 34px; transform: translate(-50%, -50%); border: 1px solid var(--control-border, #cbd0c0); border-radius: 50%; background: var(--control-bg, #f8f6ed); color: var(--olive, #59664c); opacity: .48; transition: opacity var(--motion-ui-fade, .65s) var(--motion-ui-ease, ease), background-color var(--motion-ui-color, .3s) var(--motion-ui-ease, ease), color var(--motion-ui-color, .3s) var(--motion-ui-ease, ease); pointer-events: none; }
+.light-control__handle svg { width: 21px; height: 21px; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.light-control.is-revealed .light-control__handle, .light-control:focus-within .light-control__handle { opacity: 1; }
+.light-control:has(.light-control__range:focus-visible) .light-control__handle { outline: 2px solid var(--olive, #59664c); outline-offset: 4px; }
+.light-control.is-dragging .light-control__hit { cursor: grabbing; }
+.light-control__detail { opacity: 0; transition: opacity var(--motion-ui-fade, .65s) var(--motion-ui-ease, ease); }
+.light-control.is-revealed .light-control__detail { opacity: 1; transition-duration: var(--motion-ui-fast, .12s); }
+.light-control.is-revealed .light-control__rail { opacity: .45; }
+.light-control__ticks { position: absolute; inset: 0; pointer-events: none; color: var(--muted, #777c70); font-size: 8px; letter-spacing: .06em; }
+.light-control__ticks > * { position: absolute; left: var(--tick-x); top: calc(var(--tick-y) + 22px); transform: translateX(-50%); }
+.light-control__ticks button, .light-control__boundaries button { min-width: 38px; min-height: 34px; padding: 0 11px; border: 1px solid transparent; border-radius: 3px; background: transparent; color: var(--muted, #777c70); font: inherit; font-size: 9px; letter-spacing: inherit; white-space: nowrap; pointer-events: auto; transition: background-color var(--motion-ui-tick, .15s) var(--motion-ui-ease, ease), border-color var(--motion-ui-tick, .15s) var(--motion-ui-ease, ease), color var(--motion-ui-tick, .15s) var(--motion-ui-ease, ease); }
+.light-control__ticks button { transform: translate(-50%, -11px); }
+.light-control__ticks button:hover, .light-control__ticks button:focus-visible, .light-control__boundaries button:hover, .light-control__boundaries button:focus-visible { color: var(--ink, #343a32); background: var(--control-active, #fff9); border-color: var(--olive, #59664c); }
+.light-control__toolbar { position: absolute; top: -17px; left: 0; width: 100%; min-height: 34px; pointer-events: none; }
+.light-control__toolbar { transition: opacity var(--motion-ui-fade, .65s) var(--motion-ui-ease, ease), top var(--light-layout-duration) var(--light-layout-ease); }
+.light-control.is-revealed .light-control__toolbar { transition-duration: var(--motion-ui-fast, .12s), var(--light-layout-duration); }
+.light-control__readout { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 61px; min-height: 34px; margin-inline: auto; text-align: center; color: var(--ink, #343a32); }
+.light-control__readout output { font: 500 14px/1.25 var(--display, Arial, sans-serif); font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
+.light-control__readout > span { color: var(--muted, #777c70); font-size: 8px; }
+.light-control__live { position: absolute; left: calc(50% + 46px); top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 34px; padding: 0 11px; border: 1px solid var(--control-border, #cbd0c0); border-radius: 3px; background: var(--control-bg, #f8f6ed); color: var(--olive, #59664c); font-size: 9px; white-space: nowrap; pointer-events: auto; }
+.light-control__live:hover, .light-control__indoor:hover { background: var(--hover-bg, #fff9); }
+.light-control__live-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: .3; }
+.light-control__live.is-live .light-control__live-dot { opacity: 1; }
+.light-control__indoor { position: absolute; left: clamp(18px, calc(var(--light-handle-x) + var(--light-orbit-x)), calc(100% - 18px)); top: calc(var(--light-handle-y) + var(--light-orbit-y)); transform: translate(-50%, -50%) scale(.015); transform-origin: center; display: grid; place-items: center; width: 26px; height: 26px; padding: 4px; border: 1px solid var(--control-border, #cbd0c0); border-radius: 50%; background: var(--control-bg, #f8f6ed); color: var(--muted, #777c70); opacity: 1; visibility: hidden; pointer-events: none; transition: transform var(--motion-ui-bulb-out, .24s) var(--motion-ui-ease, cubic-bezier(.4, 0, .8, .4)), visibility 0s linear var(--motion-ui-bulb-out, .24s); }
+.light-control__indoor.is-present { transform: translate(-50%, -50%) scale(1); visibility: visible; pointer-events: auto; transition: transform var(--motion-ui-bulb-in, .38s) var(--motion-ui-ease, cubic-bezier(.16, 1, .3, 1)), visibility 0s; }
+.light-control__indoor:disabled { opacity: 1; }
+/* Keep a comfortable target around the smaller visible circle. */
+.light-control__indoor::before { content: ''; position: absolute; inset: -7px; border-radius: 50%; }
+.light-control__indoor[aria-pressed="true"] { color: var(--ink, #343a32); background: var(--control-active, #fff9); }
+.light-control__indoor svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.light-control__boundaries { position: absolute; left: 4%; right: 4%; bottom: -36px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted, #777c70); font-size: 8px; pointer-events: none; }
+.light-control__sr-only, .light-control__range { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+#scene-shell[data-state="inspection"] .light-control { top: 40px; left: calc(50% + 100px); width: min(760px, calc(100% - 420px)); }
+#scene-shell[data-state="inspection"] .light-control__toolbar { top: max(78px, calc(100% - 48px)); }
+#scene-shell[data-state="inspection"] .light-control__boundaries { display: none; }
+
+@media (max-height: 800px) { .light-control__boundaries { display: none; } }
+
+/* Below the rail on narrow screens, clear of the heading and centre toolbar. */
+@media (max-width: 850px) {
+  .light-control__indoor { left: clamp(18px, calc(var(--light-handle-x) + var(--light-orbit-outward-x)), calc(100% - 18px)); top: calc(var(--light-handle-y) + 52px); }
+}
+
+@media (max-width: 700px) {
+  .light-control, #scene-shell[data-state="inspection"] .light-control { top: 132px; left: 50%; width: min(500px, calc(100% - 32px)); }
+  .light-control__toolbar { top: calc(100% + 2px); }
+  #scene-shell[data-state="inspection"] .light-control__toolbar { top: calc(100% + 2px); }
+  .light-control__boundaries { display: none; }
+  .light-control__ticks { font-size: 7px; }
+  .light-control__ticks > * { top: calc(var(--tick-y) + 20px); }
+  .light-control__handle { width: 30px; height: 30px; }
+  .light-control__handle svg { width: 18px; height: 18px; }
+  .light-control__readout output { font-size: 12px; }
+}
+
+@media (max-height: 600px) and (min-width: 851px) {
+  .light-control { top: 96px; width: min(700px, calc(100% - 300px)); }
+  .light-control__toolbar { top: -24px; }
+  .light-control__boundaries { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light-control, .light-control *, .light-control *::before, .light-control *::after { transition: none !important; }
+}

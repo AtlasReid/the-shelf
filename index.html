@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="description" content="A separate 3D study of image-based greeting cards on a simple, softly lit surface.">
+  <title>The shelf</title>
+  <link rel="stylesheet" href="scene.css">
+  <link rel="stylesheet" href="light-control.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <script type="module" src="scene.js"></script>
+</head>
+<body>
+  <main id="scene-shell" aria-labelledby="scene-heading">
+    <canvas id="scene-canvas" aria-label="Greeting cards on a softly lit surface. Use the card list to choose a card." aria-describedby="scene-instruction"></canvas>
+
+    <div id="scene-introduction" class="scene-introduction">
+      <p class="eyebrow">A PLACE FOR GOOD WISHES</p>
+      <h1 id="scene-heading">The shelf<span>.</span></h1>
+      <p id="scene-instruction">Pick up a card</p>
+      <h2 id="selected-title" aria-live="polite"></h2>
+    </div>
+
+    <p id="loading" class="scene-status" role="status">Preparing cards…</p>
+    <div id="scene-error" class="scene-status scene-error" role="alert" hidden>
+      <p>The 3D study couldn’t load.</p>
+      <a href="./compatibility/">Explore the compatibility version <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <button id="put-back" class="put-back" type="button" aria-label="Put card back" hidden><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m17 7-10 10M17 17H7V7"/></svg> Put back</button>
+
+    <nav id="card-list" aria-label="Choose a greeting card"></nav>
+
+    <section id="inspection-controls" aria-label="Card inspection controls" hidden>
+      <div class="view-shortcuts" aria-label="Card views">
+        <button type="button" data-view="front">Front</button>
+        <button type="button" data-view="inside" class="active">Inside</button>
+        <button type="button" data-view="back">Back</button>
+      </div>
+      <div class="opening-control">
+        <div class="slider-label"><label for="opening" class="inspection-hint">OPEN THE CARD</label><output id="opening-value" for="opening" class="inspection-hint">160°</output></div>
+        <input id="opening" type="range" min="0" max="180" value="160" step="1">
+        <div class="slider-extents"><span>Closed</span><span>Fully open</span></div>
+      </div>
+      <div class="inspection-tools">
+        <button id="reset-view" class="reset-view" type="button" aria-label="Reset view" title="Reset view"><span class="reset-icon" aria-hidden="true"><svg class="control-icon" viewBox="0 0 24 24" focusable="false"><path d="M3 11a9 9 0 1 1 2.7 6.4M3 4v7h7"/></svg></span><span class="inspection-hint reset-text" aria-hidden="true">Reset view</span></button>
+        <span class="drag-hint inspection-hint"><span class="mouse-gesture-hint">Drag to turn <span class="hint-separator" aria-hidden="true">·</span> Scroll to zoom</span><span class="touch-gesture-hint">Drag to turn <span class="hint-separator" aria-hidden="true">·</span> Pinch to zoom</span></span>
+      </div>
+      <div class="card-navigation">
+        <button id="previous-card" type="button" aria-label="Previous card"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5m7 7-7-7 7-7"/></svg> Previous</button>
+        <button id="next-card" type="button" aria-label="Next card">Next <svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+      </div>
+    </section>
+
+    <noscript><p class="noscript-message">Enable JavaScript for this 3D study, or <a href="./compatibility/">open the compatibility version</a>.</p></noscript>
+  </main>
+
+  <nav id="edge-card-navigation" class="edge-card-navigation" aria-label="Browse cards" hidden>
+    <button id="edge-previous-card" class="scene-action edge-card-navigation__button" type="button" aria-label="Previous card" title="Previous card"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M19 12H5m7 7-7-7 7-7"/></svg></button>
+    <button id="edge-next-card" class="scene-action edge-card-navigation__button" type="button" aria-label="Next card" title="Next card"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+  </nav>
+
+  <nav id="view-actions" class="view-actions" aria-label="Viewing tools">
+    <button id="interface-toggle" class="scene-action interface-toggle" type="button" aria-label="Hide interface" aria-pressed="false" title="Hide interface" hidden>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/><path class="interface-toggle__slash" d="m4 4 16 16"/></svg>
+    </button>
+    <button id="card-action-toggle" class="scene-action card-action-toggle" type="button" aria-label="Close card" title="Close card" data-action="close" hidden>
+      <svg class="card-action__open" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 6.5C9.5 4.7 6.3 4 3 4v14c3.3 0 6.5.7 9 2.5 2.5-1.8 5.7-2.5 9-2.5V4c-3.3 0-6.5.7-9 2.5Zm0 0v14"/></svg>
+      <svg class="card-action__close" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 3.5h11.5a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1ZM8 3.5v17"/></svg>
+      <svg class="card-action__flip" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 3.5h10v17H7zM3 10a8 8 0 0 1 18 2m0 0-3-3m3 3 1.5-4M21 14a8 8 0 0 1-18-2m0 0 3 3m-3-3L1.5 16"/></svg>
+    </button>
+  </nav>
+
+  <nav id="scene-actions" class="scene-actions" aria-label="Scene tools" hidden>
+    <p id="graphics-status" class="graphics-status" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true"><span id="graphics-status-message"></span><span id="graphics-status-detail"></span></p>
+    <button id="leaf-trigger" class="scene-action" type="button" aria-label="Blow leaves across the shelf" title="Blow a few leaves">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5c.4 7.6-1.9 13.3-7.8 14.1-3.7.5-6.8-1.7-7-5.1C5.5 8.6 9.4 5.4 20.5 3.5Z"/><path d="M3 21c2.8-5.6 7.2-9.7 13.1-12.6M8.2 12.6l.4 4.6m3.6-8.1 4.4.5"/></svg>
+    </button>
+    <button id="settings-toggle" class="scene-action" type="button" aria-label="Open settings" aria-controls="settings-panel" aria-expanded="false" title="Settings">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path transform="translate(0 -.5)" d="m9.5 3-.6 2.3-1.7 1-2.3-.6-2.5 4.3 1.7 1.7v2L2.4 15l2.5 4.3 2.3-.6 1.7 1 .6 2.3h5l.6-2.3 1.7-1 2.3.6 2.5-4.3-1.7-1.7v-2l1.7-1.7-2.5-4.3-2.3.6-1.7-1L14.5 3Z"/><circle cx="12" cy="12" r="3.2"/></svg>
+    </button>
+  </nav>
+
+  <aside id="settings-panel" class="settings-panel" role="dialog" aria-modal="false" aria-labelledby="settings-heading" hidden>
+    <header class="settings-panel__header">
+      <div><p class="settings-eyebrow">MAKE YOURSELF AT HOME</p><h2 id="settings-heading">Settings</h2></div>
+      <button id="settings-close" class="settings-close" type="button" aria-label="Close settings" title="Close settings"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg></button>
+    </header>
+
+    <p id="settings-storage-note" class="settings-storage-note">Saved on this browser. No cookies.</p>
+
+    <div class="settings-tabs" role="tablist" aria-label="Settings pages">
+      <button id="settings-general-tab" type="button" role="tab" aria-controls="settings-general" aria-selected="true">General</button>
+      <button id="settings-advanced-tab" type="button" role="tab" aria-controls="settings-advanced" aria-selected="false" tabindex="-1">Advanced</button>
+    </div>
+
+    <div id="settings-general" role="tabpanel" aria-labelledby="settings-general-tab">
+    <div id="render-diagnostics" class="render-diagnostics" aria-label="Rendering settings">
+      <section class="settings-section settings-performance" aria-labelledby="performance-heading">
+        <div class="settings-section__heading"><h3 id="performance-heading">Performance</h3><label class="settings-check" for="perf-live"><input id="perf-live" type="checkbox" checked aria-describedby="perf-live-hint"> Live FPS</label></div>
+        <div class="settings-fps"><output id="perf-fps" aria-label="Frame rate" aria-live="off">—</output><span>FPS</span><span class="settings-fps__caption">This browser</span></div>
+        <canvas id="fps-graph" class="fps-graph" width="640" height="180" role="img" aria-label="Recent frame rate graph"></canvas>
+        <div class="settings-graph-labels" aria-hidden="true"><span>Recent performance</span><span>Target 30 FPS</span></div>
+        <p id="perf-live-hint" class="settings-sr-only">Continuously render to measure frame rate. Turn off to restore rendering on demand.</p>
+      </section>
+
+      <section class="settings-section" aria-labelledby="quality-heading">
+        <div class="settings-section__heading"><h3 id="quality-heading">Picture quality</h3><label class="settings-check" for="quality-auto"><input id="quality-auto" type="checkbox" checked> Automatic</label></div>
+        <div class="settings-recommendation"><span class="settings-status-dot" aria-hidden="true"></span><div><output id="quality-status" aria-live="polite">Balanced preset</output><p id="perf-recommendation">Ready to view. Graphics adjust only if motion stays slow.</p><button id="quality-benchmark" class="settings-benchmark" type="button">Check performance <span aria-hidden="true">↻</span></button></div></div>
+        <div class="settings-control" title="Higher resolution smooths edges; hardware antialiasing stays enabled.">
+          <div class="settings-control__label"><label for="render-scale">Scene render scale</label><output id="render-scale-value" for="render-scale">1.00×</output></div>
+          <div class="render-scale-presets" aria-label="Render scale presets"><button type="button" data-render-scale="100" aria-pressed="false">1×</button><button type="button" data-render-scale="125" aria-pressed="false">1.25×</button><button type="button" data-render-scale="150" aria-pressed="false">1.5×</button><button type="button" data-render-scale="200" aria-pressed="false">2×</button></div>
+          <input id="render-scale" type="range" min="50" max="200" step="1" value="100">
+        </div>
+        <div class="settings-control">
+          <div class="settings-control__label"><label for="shadow-quality">Shadows</label><output id="shadow-quality-value" for="shadow-quality">Balanced</output></div>
+          <input id="shadow-quality" type="range" min="0" max="4" step="1" value="2">
+          <div class="settings-range-labels" aria-hidden="true"><span>Off</span><span>Ultra</span></div>
+        </div>
+        <div class="settings-control settings-reading-detail">
+          <label class="settings-check" for="inspection-detail"><input id="inspection-detail" type="checkbox" checked aria-describedby="inspection-detail-hint"> Sharper open cards</label>
+          <p id="inspection-detail-hint">Up to 2× detail for the card you’re reading.</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="settings-section settings-compatibility" aria-labelledby="compatibility-heading">
+      <div class="settings-section__heading"><h3 id="compatibility-heading">Compatibility mode</h3></div>
+      <p>A simpler card view without WebGL.</p>
+      <a id="compatibility-mode-link" class="settings-mode-link" href="./compatibility/">Open compatibility mode <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+    </section>
+
+    <section id="offline-state" class="settings-section settings-offline" data-status="preparing" aria-labelledby="offline-heading">
+      <div class="settings-section__heading"><h3 id="offline-heading">Take the shelf with you</h3><span class="settings-offline__badge">PWA</span></div>
+      <p id="offline-installed" class="settings-offline__mode">Progressive web app</p>
+      <p id="offline-status" role="status">Preparing offline access…</p>
+      <progress id="offline-progress" max="1" value="0" aria-label="Offline download progress" hidden></progress>
+      <p id="offline-progress-label" class="settings-offline__progress" hidden></p>
+    </section>
+    </div>
+
+    <div id="settings-advanced" role="tabpanel" aria-labelledby="settings-advanced-tab" hidden>
+      <p class="settings-advanced-intro">A little room to experiment. The original motion is always one reset away.</p>
+      <section id="motion-editor" class="settings-section motion-editor" aria-labelledby="motion-heading">
+        <div class="settings-section__heading"><h3 id="motion-heading">Animation studio</h3></div>
+        <label class="settings-sr-only" for="motion-target">Animation to edit</label>
+        <select id="motion-target" aria-describedby="motion-description">
+          <option value="cards">Card motion</option><option value="time">Time travel</option><option value="lighting">Lighting</option>
+          <option value="layout">Arc movement</option><option value="ui">Controls &amp; fades</option>
+          <option value="leaves">Falling leaves</option><option value="ground">Ground return</option>
+        </select>
+        <p id="motion-description" class="motion-description"></p>
+        <svg id="motion-graph" class="motion-graph" viewBox="0 0 300 218" role="group" aria-label="Animation curve editor" aria-describedby="motion-handle-help">
+          <path class="motion-grid" d="M32 20V180H268M32 100H268M150 20V180M32 20H268M268 20V180"/>
+          <path id="motion-original-path" class="motion-original-path"/>
+          <line class="motion-guide" data-motion-line="0"/><line class="motion-guide" data-motion-line="1"/>
+          <path id="motion-path" class="motion-path"/>
+          <circle class="motion-end" cx="32" cy="180" r="3"/><circle class="motion-end" cx="268" cy="20" r="3"/>
+          <g data-motion-handle="0" role="slider" tabindex="0" aria-label="Acceleration handle" aria-valuemin="0" aria-valuemax="100"><circle class="motion-handle-hit" r="18"/><circle class="motion-handle" r="7"/></g>
+          <g data-motion-handle="1" role="slider" tabindex="0" aria-label="Deceleration handle" aria-valuemin="0" aria-valuemax="100"><circle class="motion-handle-hit" r="18"/><circle class="motion-handle" r="7"/></g>
+          <circle id="motion-dot" class="motion-dot" r="4" cx="32" cy="180"/>
+          <text x="32" y="201">0</text><text x="268" y="201" text-anchor="end">100%</text><text x="150" y="214" text-anchor="middle">Time →</text>
+          <text x="7" y="104" transform="rotate(-90 7 104)" text-anchor="middle">Movement →</text>
+        </svg>
+        <p id="motion-state" class="motion-state">Original curve</p>
+        <p id="motion-handle-help" class="motion-help"></p>
+        <div class="motion-presets" aria-label="Curve presets">
+          <button type="button" data-motion-preset="original">Original</button><button type="button" data-motion-preset="smooth">Smooth</button>
+          <button type="button" data-motion-preset="linear">Linear</button><button type="button" data-motion-preset="accelerate">Speed up</button><button type="button" data-motion-preset="decelerate">Slow down</button>
+        </div>
+        <div class="settings-control">
+          <div class="settings-control__label"><label for="motion-duration">Duration</label><output id="motion-duration-value" for="motion-duration">100%</output></div>
+          <input id="motion-duration" type="range" min="25" max="300" step="5" value="100">
+          <div class="settings-range-labels"><span>Quicker</span><span>More leisurely</span></div>
+        </div>
+        <svg class="motion-preview-track" viewBox="0 0 280 42" aria-label="Motion preview"><path d="M20 21H260"/><g id="motion-preview-paper" transform="translate(10 6)"><rect width="20" height="28" rx="2"/><path d="M14 0V28"/></g></svg>
+        <div class="motion-editor-actions"><button id="motion-preview" type="button" aria-pressed="false">Play preview</button><button id="motion-reset" type="button">Reset this motion</button></div>
+        <p id="motion-reduced-note" class="motion-help" hidden>Preview is paused to respect your reduced-motion preference.</p>
+        <p class="motion-help">Try the next movement to see your changes. Saved on this browser; direct dragging stays responsive.</p>
+        <button id="motion-reset-all" class="motion-reset-all" type="button">Restore all motion defaults</button>
+      </section>
+      <section class="settings-section settings-experimental" aria-labelledby="experimental-heading">
+        <div class="settings-section__heading"><h3 id="experimental-heading">Experiments</h3></div>
+        <label class="settings-check" for="ground-movement"><input id="ground-movement" type="checkbox" aria-describedby="ground-movement-hint"> Ground movement</label>
+        <p id="ground-movement-hint">Drag empty ground to move the view. It gently returns to centre after release.</p>
+      </section>
+    </div>
+  </aside>
+</body>
+</html>

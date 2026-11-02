@@ -1,0 +1,14 @@
+{
+  "name": "the-shelf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An interactive shelf of greeting cards, daylight and small moments.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node checks/run-checks.mjs"
+  }
+}

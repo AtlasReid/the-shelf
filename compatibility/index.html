@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="description" content="A little shelf of good wishes. An interactive greeting-card prototype for Kai Atlas Reid's personal website.">
+  <title>The shelf</title>
+  <link rel="stylesheet" href="compatibility.css">
+  <script type="module" src="compatibility.js"></script>
+</head>
+<body>
+  <div class="ambient-light" aria-hidden="true"></div>
+  <main id="main">
+    <section class="introduction" aria-labelledby="page-title">
+      <div><p class="eyebrow">OBJECTS WITH A LITTLE MEANING</p><h1 id="page-title">The shelf<span>.</span></h1></div>
+      <p>Snapshots of the journey so far.<br>Encouragement for the road ahead.</p>
+    </section>
+
+    <section class="shelf-room" aria-label="Greeting card collection">
+      <div class="wall-light" aria-hidden="true"></div>
+      <div class="collection-index"><span id="card-count">05 CARDS</span><span>COLLECTED WITH LOVE</span></div>
+      <div id="shelves"></div>
+      <div class="room-note">
+        <a class="version-link" href="../index.html" aria-describedby="version-requirement"><span>Return to the 3D version</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+        <span id="version-requirement" class="version-requirement">Three.js · requires WebGL</span>
+      </div>
+    </section>
+
+    <noscript><p class="noscript">Enable JavaScript to pick up and explore the cards.</p></noscript>
+  </main>
+
+  <dialog id="card-viewer" class="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-topbar"><div><p class="eyebrow" id="viewer-occasion">A GOOD WISH</p><h2 id="viewer-title">A card for you</h2></div><button class="icon-button close-viewer" aria-label="Return card to shelf" title="Return to shelf (Esc)">×</button></div>
+    <div class="inspection-stage" id="inspection-stage" aria-label="3D card. Drag to rotate; Shift and drag to move; scroll to zoom."><div class="focus-shell" id="focus-shell"><div class="inspection-pose" id="inspection-pose"></div></div></div>
+    <div class="viewer-bottom">
+      <div class="view-shortcuts" aria-label="Card views"><button type="button" data-view="front">Front</button><button type="button" data-view="inside" class="active">Inside</button><button type="button" data-view="back">Back</button></div>
+      <div class="opening-control"><div class="slider-label"><label for="opening" class="inspection-hint">OPEN THE CARD</label><output for="opening" id="opening-value" class="inspection-hint">160°</output></div><input id="opening" type="range" min="0" max="180" value="160" step="1"><div class="slider-extents"><span>Closed</span><span>Fully open</span></div></div>
+      <div class="inspection-tools"><button type="button" class="text-button" id="reset-view" aria-label="Reset view" title="Reset view"><span aria-hidden="true">↺</span> <span class="inspection-hint reset-label" aria-hidden="true">Reset view</span></button><span class="drag-hint inspection-hint">Drag to turn <span>·</span> Scroll to zoom</span></div>
+      <div class="viewer-navigation"><button type="button" class="text-button" id="previous-card" aria-label="Previous card">← Previous</button><span id="viewer-position"></span><button type="button" class="text-button" id="next-card" aria-label="Next card">Next →</button></div>
+    </div>
+  </dialog>
+
+</body>
+</html>

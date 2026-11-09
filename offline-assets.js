@@ -2,7 +2,7 @@ import { cards } from './compatibility/cards.js';
 
 // Keep this list aligned with the runtime import/asset closure. The check in
 // checks/offline-check.mjs verifies every entry and local dependency.
-export const OFFLINE_VERSION = '20261102-v1.0.0-description';
+export const OFFLINE_VERSION = '20261109-polar-bear-gold-ink';
 export const OFFLINE_ASSETS = Object.freeze([
   'index.html', 'scene.css', 'scene.js',
   'card-mesh.js', 'paper-material.js', 'lighting.js', 'solar-time.js',

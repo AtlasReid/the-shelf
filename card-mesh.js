@@ -107,10 +107,6 @@ function detailControl({card, base, surfaceNames, previewResources, materials, o
   };
 }
 
-function printedPaper(texture, width, height, metallic = false, foilMap = null) {
-  return createPaperMaterial({ map: texture, width, height, metallic, foilMap });
-}
-
 function createCrease(width, height, material, cardId) {
   // A constant-thickness annular sector joins the two paper solids. At 0°
   // opening this is a rounded U-fold; at 180° it flattens into their shared edge.
@@ -223,8 +219,8 @@ export async function createCard(card, {
   }
   const base = assetBase instanceof URL ? assetBase : new URL(assetBase, import.meta.url);
   const finishEntries = Object.entries(card.finishMaps ?? {});
-  if (finishEntries.some(([surface,path]) => !['front','back'].includes(surface) || typeof path !== 'string')) {
-    throw new TypeError('Selective foil maps must be front/back exterior image URLs.');
+  if (finishEntries.some(([surface,path]) => !surfaceNames.includes(surface) || typeof path !== 'string')) {
+    throw new TypeError('Selective finish maps must reference this card’s printed surfaces.');
   }
   const previewResources = surfaceNames.map(surface => acquireSurface(new URL(card.previewSurfaces?.[surface] ?? card.surfaces[surface], base)));
   const finishResources = finishEntries.map(([,path]) => acquireSurface(new URL(path,base), {data:true}));
@@ -234,6 +230,12 @@ export async function createCard(card, {
   const maps = Object.fromEntries(surfaceNames.map((surface, index) => [surface, textures[index]]));
   const finishMaps = Object.fromEntries(finishEntries.map(([surface],index) => [surface,finishResources[index].texture]));
   const metallic = card.finish === 'metallic-outside';
+  const printedPaper = (surface, width, height) => createPaperMaterial({
+    map: maps[surface], width, height,
+    metallic: metallic && ['front','back'].includes(surface),
+    foilMap: finishMaps[surface],
+    metallicInk: card.finish === 'gold-metallic-ink',
+  });
 
   const group = new THREE.Group();
   group.name = `${card.id || 'card'} — interaction root`;
@@ -253,8 +255,8 @@ export async function createCard(card, {
     geometry.translate(0, physicalHeight / 2, 0);
     const edge = createPaperMaterial({ width:physicalWidth, height:physicalHeight, color:'#f6f2e8', edge:true });
     const sheet = new THREE.Mesh(geometry, [edge, edge, edge, edge,
-      printedPaper(maps.front, physicalWidth, physicalHeight, metallic, finishMaps.front),
-      printedPaper(maps.back, physicalWidth, physicalHeight, metallic, finishMaps.back),
+      printedPaper('front', physicalWidth, physicalHeight),
+      printedPaper('back', physicalWidth, physicalHeight),
     ]);
     sheet.name = 'Single two-sided postcard';
     sheet.castShadow = sheet.receiveShadow = true;
@@ -321,10 +323,10 @@ export async function createCard(card, {
   const edgePaper = createPaperMaterial({ width, height, color: '#f6f2e8', edge: true });
   const edges = [edgePaper, edgePaper, edgePaper, edgePaper];
   const backLeaf = new THREE.Mesh(backGeometry, [
-    ...edges, printedPaper(maps.insideRight, width, height), printedPaper(maps.back, width, height, metallic, finishMaps.back),
+    ...edges, printedPaper('insideRight', width, height), printedPaper('back', width, height),
   ]);
   const frontLeaf = new THREE.Mesh(geometry, [
-    ...edges, printedPaper(maps.front, width, height, metallic, finishMaps.front), printedPaper(maps.insideLeft, width, height),
+    ...edges, printedPaper('front', width, height), printedPaper('insideLeft', width, height),
   ]);
   const hingeOffset = (PAPER_THICKNESS + INNER_GAP) / 2;
   backLeaf.name = 'Back leaf';

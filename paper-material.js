@@ -86,14 +86,15 @@ function mapsForSize(width, height) {
   return sizeCache.get(key);
 }
 
-export function createPaperMaterial({map = null, width = 1, height = 1, color = 0xffffff, edge = false, metallic = false, foilMap = null} = {}) {
+export function createPaperMaterial({map = null, width = 1, height = 1, color = 0xffffff, edge = false, metallic = false, foilMap = null, metallicInk = false} = {}) {
   const {normalMap, roughnessMap} = mapsForSize(width, height);
+  const ink = Boolean(foilMap && metallicInk);
   const material = new THREE.MeshStandardMaterial({
-    name: edge ? 'Textured uncoated paper edges and crease' : foilMap ? 'Printed paper with selective gold foil' : metallic ? 'Metallic printed exterior with fine paper grain' : 'Printed paper with subtle pulp grain',
+    name: edge ? 'Textured uncoated paper edges and crease' : ink ? 'Paper with selective gold metallic handwriting' : foilMap ? 'Printed paper with selective gold foil' : metallic ? 'Metallic printed exterior with fine paper grain' : 'Printed paper with subtle pulp grain',
     color,
     map,
     normalMap,
-    normalScale: new THREE.Vector2(edge ? .08 : metallic ? .07 : .16, edge ? .08 : metallic ? .07 : .16),
+    normalScale: new THREE.Vector2(edge ? .08 : ink ? .12 : metallic ? .07 : .16, edge ? .08 : ink ? .12 : metallic ? .07 : .16),
     roughness: metallic ? .34 : .98,
     // The selective finish map uses linear green for roughness and blue for
     // metalness. Its white roughness/black metalness background stays matte.
@@ -101,11 +102,11 @@ export function createPaperMaterial({map = null, width = 1, height = 1, color = 
     // A partial metallic response preserves the photographed print in shade,
     // while direct sunlight or the indoor lamp produces a moving foil sheen.
     // This is an appearance approximation from one scan, not a measured BRDF.
-    metalness: foilMap ? .34 : metallic ? .42 : 0,
+    metalness: ink ? .30 : foilMap ? .34 : metallic ? .42 : 0,
     metalnessMap: foilMap,
     side: THREE.FrontSide,
   });
   material.userData.paperGrain = {tileWorldSize:TILE_WORLD_SIZE,source:'procedural pulp and fibres'};
-  material.userData.finish = foilMap ? 'selective-gold-foil' : metallic ? 'metallic-scan-approximation' : 'matte-paper';
+  material.userData.finish = ink ? 'selective-gold-metallic-ink' : foilMap ? 'selective-gold-foil' : metallic ? 'metallic-scan-approximation' : 'matte-paper';
   return material;
 }

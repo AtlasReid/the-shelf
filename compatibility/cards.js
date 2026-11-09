@@ -464,6 +464,10 @@ export const cards = [
       "back": "assets/scans/previews/card-14-back_210.6x148.4mm.webp",
       "insideLeft": "assets/scans/previews/card-14-inside-left_210.6x148.4mm.webp",
       "insideRight": "assets/scans/previews/card-14-inside-right_210.6x148.4mm.webp"
+    },
+    "finish": "gold-metallic-ink",
+    "finishMaps": {
+      "insideRight": "assets/scans/card-14-inside-right-ink_210.6x148.4mm.png"
     }
   }
 ];

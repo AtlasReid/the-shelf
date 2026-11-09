@@ -952,6 +952,10 @@
           "full": "assets/scans/card-14-inside-right_210.6x148.4mm.webp",
           "preview": "assets/scans/previews/card-14-inside-right_210.6x148.4mm.webp"
         }
+      },
+      "finish": "gold-metallic-ink",
+      "finishMaps": {
+        "insideRight": "assets/scans/card-14-inside-right-ink_210.6x148.4mm.png"
       }
     }
   ]

@@ -2,7 +2,7 @@
 
 An interactive collection of 14 scanned greeting cards by Kai Atlas Reid. Pick up a card, turn it over and open it to read the inside. The scene includes time-of-day lighting, wind-blown leaves, graphics settings and offline support.
 
-[Open The shelf](https://atlasreid.github.io/the-shelf/) · **Version 1.0.0**
+[Open The shelf](https://shelf.atlasreid.com/) · **Version 1.0.0**
 
 ## Built with
 
@@ -39,7 +39,7 @@ node checks/run-checks.mjs
 
 ## GitHub Pages
 
-Publish the repository root through **Settings → Pages → Deploy from a branch → main → /(root)**. No build command or custom domain is required. Keep `.nojekyll` and relative asset URLs so deployment under a repository prefix works.
+Publish the repository root through **Settings → Pages → Deploy from a branch → main → /(root)**. The configured custom domain is **shelf.atlasreid.com**; preserve the root `CNAME` file. No build command is required. Keep `.nojekyll` and relative asset URLs so both the custom-domain root and local repository-prefix previews work.
 
 ## Source map
 

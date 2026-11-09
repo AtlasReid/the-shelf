@@ -15,10 +15,14 @@
   --range-thumb: #f9f8ee;
   --sans: 'DM Sans', Arial, sans-serif;
   --display: 'Manrope', Arial, sans-serif;
+  --brand-ink: #272b24;
+  --brand-accent: #77946b;
   color-scheme: light;
 }
 
 body[data-time-mode="night"] {
+  --brand-ink: #e7e9e4;
+  --brand-accent: #d4dcc3;
   --ink: #e7e9e4;
   --olive: #d4dcc3;
   --muted: #a8b4c3;
@@ -46,12 +50,18 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 
 #scene-shell { flex: 1 1 auto; min-height: 0; width: 100%; position: relative; isolation: isolate; overflow: hidden; }
 #scene-canvas { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
-.scene-introduction { position: absolute; z-index: 1; top: 38px; left: 6%; max-width: min(460px, 65vw); pointer-events: none; user-select: none; }
-.eyebrow { margin: 0 0 13px; color: var(--muted); font-size: 8px; font-weight: 550; letter-spacing: .18em; }
-h1 { margin: 0; font: 500 clamp(40px, 4.7vw, 64px)/1.13 var(--display); letter-spacing: -.075em; }
-h1 > span { color: var(--olive); }
-#scene-instruction { margin: 16px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
-#selected-title { margin: 9px 0 0; font: 500 16px/1.4 var(--display); letter-spacing: -.025em; }
+.scene-introduction { position: absolute; z-index: 1; inset: 0 0 auto; width: 100%; color: var(--brand-ink); font: 16px Arial, Helvetica, sans-serif; font-synthesis: none; pointer-events: none; user-select: none; -webkit-user-select: none; }
+/* Use the Collection's actual flex layout, padding and breakpoints. Keeping the
+   shared identity in an overlay leaves the 3D canvas at full viewport size. */
+.scene-masthead { width: 100%; margin: 0; padding: max(42px, env(safe-area-inset-top)) max(5.3%, env(safe-area-inset-right)) 12px max(5.3%, env(safe-area-inset-left)); display: flex; justify-content: space-between; align-items: center; }
+.scene-title-block { padding: 29px max(5.3%, env(safe-area-inset-right)) 0 max(5.3%, env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: flex-start; }
+.wordmark { color: var(--brand-ink); font-size: 23px; font-weight: 600; letter-spacing: -1.1px; pointer-events: auto; }
+.wordmark > span { color: var(--brand-accent); }
+h1 { margin: 0; color: var(--brand-ink); font: 400 clamp(32px, 3.4vw, 51px)/1.09 Arial, Helvetica, sans-serif; letter-spacing: -1.9px; }
+/* Retain the canvas's accessible instruction while keeping the shared title
+   area as quiet as the Collection's. */
+#scene-instruction { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+#selected-title { margin: 9px 0 0; font: 500 16px/1.4 Arial, Helvetica, sans-serif; letter-spacing: -.025em; }
 #selected-title:empty { display: none; }
 .scene-status { position: absolute; z-index: 3; top: 46%; left: 50%; margin: 0; padding: 16px 22px; transform: translate(-50%, -50%); color: var(--muted); font-size: 12px; line-height: 1.7; text-align: center; pointer-events: none; }
 .scene-error { max-width: calc(100% - 40px); width: 340px; padding: 24px; background: var(--wall); border: 1px solid var(--line); border-radius: 5px; pointer-events: auto; }
@@ -217,11 +227,11 @@ body[data-interface-visibility="hidden"] :is(.scene-introduction, #card-list, #i
 .settings-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 @keyframes settings-arrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 
+@media (max-width: 900px) {
+  .scene-title-block { padding-top: 22px; }
+}
+
 @media (max-width: 700px) {
-  .scene-introduction { top: 27px; left: 6%; max-width: 65vw; }
-  .eyebrow { font-size: 6px; letter-spacing: .12em; margin-bottom: 10px; }
-  h1 { font-size: 43px; }
-  #scene-instruction { margin-top: 11px; font-size: 10px; }
   #selected-title { margin-top: 6px; font-size: 13px; }
   .put-back { top: 25px; right: 6%; min-height: 36px; padding: 0 10px; gap: 5px; font-size: 10px; }
   .put-back .control-icon { width: 16px; height: 16px; }
@@ -239,9 +249,14 @@ body[data-interface-visibility="hidden"] :is(.scene-introduction, #card-list, #i
   .settings-panel { right: 16px; bottom: 67px; max-height: calc(100dvh - 90px); padding: 20px; }
 }
 
+@media (max-width: 600px) {
+  .scene-masthead { padding: max(31px, env(safe-area-inset-top)) max(6%, env(safe-area-inset-right)) 12px max(6%, env(safe-area-inset-left)); }
+  .scene-title-block { padding: 21px max(6%, env(safe-area-inset-right)) 0 max(6%, env(safe-area-inset-left)); }
+  .wordmark { font-size: 21px; }
+  h1 { font-size: 34px; letter-spacing: -1.4px; }
+}
+
 @media (max-height: 600px) and (min-width: 701px) {
-  .scene-introduction { top: 24px; }
-  h1 { font-size: 43px; }
   #inspection-controls { bottom: 12px; }
   .view-shortcuts { margin-bottom: 12px; }
   .inspection-tools { margin-top: 10px; }

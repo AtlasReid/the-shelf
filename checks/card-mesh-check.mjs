@@ -125,9 +125,31 @@ try {
   assert.equal(foilFront.metalnessMap,foilData,'Full-resolution promotion preserves the selective finish.');
   await selective.setDetail('preview');
   assert.equal(foilFront.roughnessMap,foilData,'Returning to previews preserves the selective finish.');
+  const inkCard = await createCard(fixture({id:'ink-14',width:210.6,height:148.4,foldAxis:'horizontal',finish:'gold-metallic-ink',
+    finishMaps:{insideRight:'material/card-14-inside-gold.png'},
+    previewSurfaces:Object.fromEntries(Object.keys(surfaces).map(name => [name,`ink-preview-${name}.jpg`])),
+  }));
+  const inkInside=leaf(inkCard,'back').material[4], inkData=inkInside.metalnessMap;
+  assert.ok(inkData && inkInside.normalMap,'The handwritten inside combines its metal mask with paper grain.');
+  assert.equal(inkInside.userData.finish,'selective-gold-metallic-ink');
+  assert.equal(inkData,inkInside.roughnessMap);
+  assert.equal(inkData.colorSpace,THREE.NoColorSpace);
+  assert.ok(inkInside.metalness>0 && inkInside.metalness<foilFront.metalness,'Metallic ink is softer than foil.');
+  for (const material of [...leaf(inkCard,'front').material.slice(4),leaf(inkCard,'back').material[5]]) {
+    assert.equal(material.metalness,0,'The other inside and both exterior faces remain matte.');
+    assert.equal(material.metalnessMap,null);
+  }
+  inkCard.setOpening(180); inkCard.group.updateMatrixWorld(true);
+  assertUpright(leaf(inkCard,'back'),4,1,'The horizontal handwritten leaf stays upright with its matching finish UVs');
+  const inkUVs=Array.from(leaf(inkCard,'back').geometry.getAttribute('uv').array);
+  await inkCard.setDetail('full');
+  await inkCard.setDetail('preview');
+  assert.equal(inkInside.metalnessMap,inkData,'Reading/preview swaps retain the same inside ink mask.');
+  assert.deepEqual(Array.from(leaf(inkCard,'back').geometry.getAttribute('uv').array),inkUVs);
   await assert.rejects(createCard(fixture({width:0})),RangeError);
   await assert.rejects(createCard(fixture({type:'postcard',surfaces:{front:'only-front.jpg'}})),TypeError);
-  await assert.rejects(createCard(fixture({finishMaps:{insideLeft:'invalid-inside.png'}})),TypeError);
+  await assert.rejects(createCard(fixture({finishMaps:{unknown:'invalid-face.png'}})),TypeError);
+  await assert.rejects(createCard(fixture({type:'postcard',finishMaps:{insideLeft:'invalid-inside.png'}})),TypeError);
 
   // Control decode completion to cover return/reselect races and failed loads.
   // Texture disposal events test actual cache ownership, not a mock counter in
@@ -225,7 +247,7 @@ try {
   await foldedDetail.setDetail('preview');
   assert.ok(foldedRequests.every(request => request.disposed === 1));
   await assert.rejects(detailed.setDetail('unknown'),TypeError);
-  console.log('Card mesh checks passed: postcard, both fold axes, fit/UV/crease geometry, exterior finish, and race-safe texture detail/disposal.');
+console.log('Card mesh checks passed: postcard, both fold axes, fit/UV/crease geometry, exterior foil/interior metallic ink, and race-safe texture detail/disposal.');
 } finally {
   THREE.TextureLoader.prototype.loadAsync = originalLoad;
 }

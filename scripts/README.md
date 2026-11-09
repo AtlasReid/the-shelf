@@ -20,7 +20,11 @@ Detailed surfaces use sRGB, WebP quality 90 and a maximum 1,800-pixel long edge.
 
 Card 04's `finish: 'metallic-outside'` is a material hint. The scan files do not contain invented highlights or metallic pixels; the 3D app adds the light response separately, and a flat scan cannot recover the original material's reflectance exactly.
 
-Card 03 uses `finish: 'gold-foil'` with a small, UV-aligned front material map in `finishMaps`. Only its warm gold sun is selected, inside a broad region that excludes scanner-edge colour casts. The blue channel supplies metalness and the green channel supplies roughness in linear colour space; white paper and navy printing remain matte. Its RGB scan images are unchanged. The map's 1024-pixel long edge preserves a soft boundary while adding under 10 KB. To rebuild only this material map and its catalogue/manifest entries, leaving the 108 existing scan derivatives byte-identical:
+Card 03 uses `finish: 'gold-foil'` with a small, UV-aligned front material map in `finishMaps`. Only its warm gold sun is selected, inside a broad region that excludes scanner-edge colour casts. The blue channel supplies metalness and the green channel supplies roughness in linear colour space; white paper and navy printing remain matte. Its RGB scan images are unchanged. The map's 1024-pixel long edge preserves a soft boundary while adding under 10 KB.
+
+Card 14 uses `finish: 'gold-metallic-ink'` and a 1024-pixel `insideRight` material map for the handwritten “Merry Christmas & Happy 2024!” greeting. Warm-colour selection follows the actual gold strokes within the greeting region, excluding the white paper, black salutation/signature and scanner edges. Its higher roughness and lower metalness produce a softer response than card 03's foil. The other inside and both exterior surfaces remain matte. The map is about 44 KB; the RGB scans are unchanged, and the same material coordinates apply in preview and reading detail.
+
+To rebuild both selective material maps and their catalogue/manifest entries, leaving the 108 existing scan derivatives byte-identical:
 
 ```sh
 python scripts/prepare-card-scans.py "../../Paired cards" --finish-only

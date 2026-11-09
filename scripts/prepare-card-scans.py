@@ -105,6 +105,38 @@ def export_gold_foil(image: Image.Image, width: float, height: float) -> str:
     return f"assets/scans/{filename}"
 
 
+def export_gold_ink(image: Image.Image, width: float, height: float) -> str:
+    """Select card 14's warm handwritten greeting on its lower inside leaf.
+
+    Keep the photographed RGB scan untouched. The linear material map follows
+    the actual gold strokes, leaving black handwriting and white paper matte.
+    Metallic marker ink is rougher than the foil used on card 03.
+    """
+    factor = 1024 / max(width, height)
+    size = (round(width * factor), round(height * factor))
+    small = image.resize(size, Image.Resampling.LANCZOS)
+    coverage = Image.new("L", size)
+    def smooth(value: float) -> float:
+        t = max(0.0, min(1.0, value))
+        return t * t * (3 - 2 * t)
+    values = []
+    for y in range(size[1]):
+        for x in range(size[0]):
+            r, g, b = small.getpixel((x, y))
+            if .10 <= x / size[0] <= .90 and .30 <= y / size[1] <= .64:
+                amount = smooth((r - b - 12) / 34) * smooth((g - b - 8) / 32)
+            else:
+                amount = 0
+            values.append(round(amount * 255))
+    coverage.putdata(values)
+    coverage = coverage.filter(ImageFilter.GaussianBlur(.4))
+    roughness = coverage.point(lambda value: round(255 - value * .46))
+    output = Image.merge("RGB", (Image.new("L", size, 255), roughness, coverage))
+    filename = f"card-14-inside-right-ink_{width:g}x{height:g}mm.png"
+    output.save(DEST / filename, "PNG", optimize=True)
+    return f"assets/scans/{filename}"
+
+
 def prepare(number: int, title: str, occasion: str) -> dict:
     folder = SOURCE / f"Card_{number:02d}"
     outside_path, = folder.glob("1_Outside_*.jpg")
@@ -169,12 +201,15 @@ def prepare(number: int, title: str, occasion: str) -> dict:
     if number == 3:
         record["finish"] = "gold-foil"
         record["finishMaps"] = {"front": export_gold_foil(faces["front"], width, height)}
+    if number == 14:
+        record["finish"] = "gold-metallic-ink"
+        record["finishMaps"] = {"insideRight": export_gold_ink(faces["insideRight"], width, height)}
     MANIFEST.append({
         "id": record["id"], "scanNumber": record["scanNumber"], "sourceFolder": folder.name,
         "type": kind, "foldAxis": axis, "closedSizeMm": [width, height],
         "outsideSizeMm": [flat_width, flat_height],
         "insideSizeMm": list(millimetres(inside_path)),
-        **({"finish": record["finish"], "finishMaps": record["finishMaps"]} if number == 3 else {}),
+        **({"finish": record["finish"], "finishMaps": record["finishMaps"]} if number in (3, 14) else {}),
         "surfaces": {face: {
             "source": sources[face][0], "cropPixels": sources[face][1],
             "rotationDegrees": sources[face][2],
@@ -203,15 +238,24 @@ if __name__ == "__main__":
         # left byte-for-byte unchanged, avoiding needless resampling/encoding.
         catalog = (ROOT / "compatibility" / "cards.js").read_text(encoding="utf-8")
         records = json.loads(catalog.split("export const cards = ", 1)[1].strip().removesuffix(";"))
-        record = next(card for card in records if card["number"] == 3)
-        outside_path, = (SOURCE / "Card_03").glob("1_Outside_*.jpg")
-        outside = srgb(outside_path)
-        ow, oh = outside.size
-        record["finish"] = "gold-foil"
-        record["finishMaps"] = {"front": export_gold_foil(outside.crop((ow // 2, 0, ow, oh)), record["width"], record["height"])}
         manifest = json.loads((DEST / "manifest.json").read_text(encoding="utf-8"))
-        entry = next(card for card in manifest["cards"] if card["id"] == record["id"])
-        entry.update({"finish": record["finish"], "finishMaps": record["finishMaps"]})
+        for number in (3, 14):
+            record = next(card for card in records if card["number"] == number)
+            folder = SOURCE / f"Card_{number:02d}"
+            if number == 3:
+                source_path, = folder.glob("1_Outside_*.jpg")
+                image = srgb(source_path)
+                w, h = image.size
+                record["finish"] = "gold-foil"
+                record["finishMaps"] = {"front": export_gold_foil(image.crop((w // 2, 0, w, h)), record["width"], record["height"])}
+            else:
+                source_path, = folder.glob("2_Inside_*.jpg")
+                image = srgb(source_path)
+                w, h = image.size
+                record["finish"] = "gold-metallic-ink"
+                record["finishMaps"] = {"insideRight": export_gold_ink(image.crop((0, h // 2, w, h)), record["width"], record["height"])}
+            entry = next(card for card in manifest["cards"] if card["id"] == record["id"])
+            entry.update({"finish": record["finish"], "finishMaps": record["finishMaps"]})
     else:
         records = [prepare(*card) for card in CARDS]
         manifest = {
